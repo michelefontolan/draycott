@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Draycott Holdings</title>
+  <meta name="description" content="Draycott Holdings — London · Dubai · Europe" />
+  <meta name="theme-color" content="#406479" />
+  <meta property="og:title" content="Draycott Holdings" />
+  <meta property="og:description" content="London · Dubai · Europe" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://draycottholdings.com/" />
+  <meta property="og:image" content="https://draycottholdings.com/assets/draycott-social-card.png" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #406479;
+      --ink-soft: #35586a;
+      --paper: #f5f3ec;
+      --paper-dim: rgba(245, 243, 236, 0.68);
+      --line: rgba(245, 243, 236, 0.10);
+      --line-strong: rgba(245, 243, 236, 0.20);
+      --accent: #9ed7d9;
+      --pad: clamp(24px, 4.2vw, 72px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      position: relative;
+      min-height: 100svh;
+      isolation: isolate;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: var(--pad);
+      overflow: hidden;
+    }
+
+    #network {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+    }
+
+    .wash {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 74% 45%, rgba(158,215,217,.12), transparent 33%),
+        radial-gradient(ellipse at 18% 80%, rgba(245,243,236,.05), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.04), transparent 30%, rgba(0,0,0,.12));
+    }
+
+    .topbar,
+    .footer {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .monogram {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--paper-dim);
+    }
+
+    .mark {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+    }
+
+    .mark::before,
+    .mark::after {
+      content: "";
+      position: absolute;
+      inset: 4px 6px;
+      border-left: 1px solid var(--paper);
+      border-right: 1px solid var(--paper);
+      transform: skewY(-28deg);
+      opacity: .82;
+    }
+
+    .mark::after {
+      inset: 8px 3px;
+      border-right: 0;
+      border-left-color: var(--accent);
+      transform: rotate(-32deg);
+      transform-origin: center;
+    }
+
+    .edition {
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(240,238,231,.34);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      align-self: center;
+      display: grid;
+      gap: clamp(14px, 2vw, 28px);
+      width: min(100%, 1320px);
+      padding-block: clamp(72px, 12vh, 150px);
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: clamp(10px, .7vw, 12px);
+      letter-spacing: .31em;
+      text-transform: uppercase;
+      color: var(--paper-dim);
+      opacity: 0;
+      animation: reveal .8s .15s ease-out forwards;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 12ch;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(62px, 12vw, 190px);
+      font-weight: 400;
+      line-height: .79;
+      letter-spacing: -.065em;
+      text-wrap: balance;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: reveal 1.05s .25s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .places {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin: 0;
+      padding-left: clamp(3px, .7vw, 10px);
+      font-size: clamp(12px, 1.05vw, 16px);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(240,238,231,.72);
+      opacity: 0;
+      animation: reveal .8s .55s ease-out forwards;
+    }
+
+    .places i {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(185,147,105,.55);
+    }
+
+    .footer {
+      align-items: flex-end;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(240,238,231,.45);
+    }
+
+    .linkedin {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 7px;
+      text-decoration: none;
+      color: rgba(240,238,231,.68);
+      transition: color .25s ease;
+    }
+
+    .linkedin::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(.28);
+      transform-origin: left;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .linkedin:hover,
+    .linkedin:focus-visible { color: var(--paper); }
+
+    .linkedin:hover::after,
+    .linkedin:focus-visible::after { transform: scaleX(1); }
+
+    .arrow {
+      font-size: 15px;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    .copyright { white-space: nowrap; }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      :root { --pad: 24px; }
+
+      .page { min-height: 100dvh; }
+      .edition { display: none; }
+      .hero { padding-block: 92px 120px; }
+      h1 { font-size: clamp(67px, 23vw, 112px); line-height: .83; }
+      .places { max-width: 320px; gap: 12px 14px; font-size: 11px; letter-spacing: .21em; }
+      .footer { gap: 16px; align-items: flex-end; }
+      .copyright { font-size: 9px; letter-spacing: .11em; max-width: 44vw; white-space: normal; line-height: 1.5; }
+      .linkedin { font-size: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      #network { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <canvas id="network" aria-hidden="true"></canvas>
+    <div class="wash" aria-hidden="true"></div>
+
+    
+
+    <section class="hero" aria-labelledby="draycott-title">
+      <h1 id="draycott-title">Draycott</h1>
+      <p class="places" aria-label="Locations: London, Dubai, Europe">
+        <span>London</span><i aria-hidden="true"></i>
+        <span>Dubai</span><i aria-hidden="true"></i>
+        <span>Europe</span>
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span class="copyright"></span>
+      <a class="linkedin" href="https://www.linkedin.com/company/draycott-holdings" target="_blank" rel="noopener noreferrer">
+        LinkedIn <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('network');
+      const ctx = canvas.getContext('2d', { alpha: true });
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let width = 0, height = 0, dpr = 1, raf = 0, last = 0;
+      let nodes = [], routes = [], pulses = [];
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        buildNetwork();
+      }
+
+      function buildNetwork() {
+        const spacing = width < 700 ? 72 : Math.max(86, Math.min(132, width / 12));
+        const cols = Math.ceil(width / spacing) + 2;
+        const rows = Math.ceil(height / spacing) + 2;
+        nodes = [];
+        routes = [];
+        pulses = [];
+
+        for (let y = -1; y < rows; y++) {
+          for (let x = -1; x < cols; x++) {
+            const px = x * spacing + (y % 2 ? spacing * .5 : 0);
+            const py = y * spacing * .68;
+            nodes.push({ x: px, y: py });
+          }
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist > spacing * .45 && dist < spacing * 1.05) {
+              const bias = (a.x / Math.max(width, 1)) * .36 + .06;
+              if (Math.random() < bias) routes.push({ a, b, phase: Math.random() });
+            }
+          }
+        }
+      }
+
+      function addPulse() {
+        if (!routes.length || pulses.length > 7) return;
+        const route = routes[(Math.random() * routes.length) | 0];
+        pulses.push({ route, t: 0, speed: .12 + Math.random() * .12, life: 1 });
+      }
+
+      function draw(time) {
+        const dt = Math.min((time - last) / 1000 || 0, .05);
+        last = time;
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.lineWidth = .7;
+        ctx.strokeStyle = 'rgba(245,243,236,.12)';
+        ctx.beginPath();
+        for (const r of routes) {
+          ctx.moveTo(r.a.x, r.a.y);
+          ctx.lineTo(r.b.x, r.b.y);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(245,243,236,.18)';
+        for (const n of nodes) {
+          if (n.x < width * .34 && Math.random() > .12) continue;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, .85, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        if (!reduceMotion && Math.random() < dt * 1.2) addPulse();
+
+        for (let i = pulses.length - 1; i >= 0; i--) {
+          const p = pulses[i];
+          p.t += p.speed * dt;
+          if (p.t > 1) { p.life -= dt * 1.8; }
+          if (p.life <= 0) { pulses.splice(i, 1); continue; }
+
+          const { a, b } = p.route;
+          const t = Math.min(p.t, 1);
+          const x = a.x + (b.x - a.x) * t;
+          const y = a.y + (b.y - a.y) * t;
+          const glow = ctx.createRadialGradient(x, y, 0, x, y, 16);
+          glow.addColorStop(0, `rgba(158,215,217,${.85 * p.life})`);
+          glow.addColorStop(.25, `rgba(158,215,217,${.34 * p.life})`);
+          glow.addColorStop(1, 'rgba(185,147,105,0)');
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(x, y, 16, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = `rgba(245,243,236,${.82 * p.life})`;
+          ctx.beginPath();
+          ctx.arc(x, y, 1.25, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        raf = requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else { last = performance.now(); raf = requestAnimationFrame(draw); }
+      });
+
+      resize();
+      if (!reduceMotion) raf = requestAnimationFrame(draw);
+    })();
+  </script>
+</body>
+</html>
