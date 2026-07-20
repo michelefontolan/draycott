@@ -85,8 +85,14 @@
       z-index: 3;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    }
+
+    .topbar {
+      justify-content: flex-end;
+    }
+
+    .footer {
+      justify-content: center;
     }
 
     .monogram {
@@ -138,10 +144,10 @@
       position: relative;
       z-index: 2;
       align-self: center;
-      display: grid;
-      gap: clamp(14px, 2vw, 28px);
+      justify-self: center;
       width: min(100%, 1320px);
       padding-block: clamp(72px, 12vh, 150px);
+      text-align: center;
     }
 
     .eyebrow {
@@ -156,7 +162,7 @@
 
     h1 {
       margin: 0;
-      max-width: 12ch;
+      max-width: none;
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(62px, 12vw, 190px);
       font-weight: 400;
@@ -168,21 +174,17 @@
       animation: reveal 1.05s .25s cubic-bezier(.2,.7,.2,1) forwards;
     }
 
-    h1 span {
-      color: var(--accent);
-    }
-
     .places {
       display: flex;
       align-items: center;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 12px 18px;
       margin: 0;
-      padding-left: clamp(3px, .7vw, 10px);
-      font-size: clamp(12px, 1.05vw, 16px);
+      font-size: clamp(11px, .9vw, 14px);
       letter-spacing: .24em;
       text-transform: uppercase;
-      color: rgba(240,238,231,.72);
+      color: rgba(245,243,236,.76);
       opacity: 0;
       animation: reveal .8s .55s ease-out forwards;
     }
@@ -192,16 +194,9 @@
       height: 3px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 18px rgba(185,147,105,.55);
+      box-shadow: 0 0 18px rgba(158,215,217,.58);
     }
 
-    .footer {
-      align-items: flex-end;
-      font-size: 11px;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: rgba(240,238,231,.45);
-    }
 
     .linkedin {
       position: relative;
@@ -210,7 +205,7 @@
       gap: 10px;
       padding-bottom: 7px;
       text-decoration: none;
-      color: rgba(240,238,231,.68);
+      color: rgba(245,243,236,.76);
       transition: color .25s ease;
     }
 
@@ -239,10 +234,13 @@
       transform: translateY(-1px);
     }
 
-    .copyright { white-space: nowrap; }
 
     @keyframes reveal {
       to { opacity: 1; transform: translateY(0); }
+    }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     @media (max-width: 700px) {
@@ -250,11 +248,9 @@
 
       .page { min-height: 100dvh; }
       .edition { display: none; }
-      .hero { padding-block: 92px 120px; }
+      .hero { padding-block: 72px 96px; }
       h1 { font-size: clamp(67px, 23vw, 112px); line-height: .83; }
-      .places { max-width: 320px; gap: 12px 14px; font-size: 11px; letter-spacing: .21em; }
-      .footer { gap: 16px; align-items: flex-end; }
-      .copyright { font-size: 9px; letter-spacing: .11em; max-width: 44vw; white-space: normal; line-height: 1.5; }
+      .places { max-width: 320px; gap: 12px 14px; font-size: 10px; letter-spacing: .19em; }
       .linkedin { font-size: 10px; }
     }
 
@@ -269,22 +265,22 @@
     <canvas id="network" aria-hidden="true"></canvas>
     <div class="wash" aria-hidden="true"></div>
 
-    
+    <header class="topbar">
+      <a class="linkedin" href="https://www.linkedin.com/company/draycott-holdings" target="_blank" rel="noopener noreferrer" aria-label="Contact Draycott on LinkedIn">
+        Contact us <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </header>
 
     <section class="hero" aria-labelledby="draycott-title">
       <h1 id="draycott-title">Draycott</h1>
+    </section>
+
+    <footer class="footer">
       <p class="places" aria-label="Locations: London, Dubai, Europe">
         <span>London</span><i aria-hidden="true"></i>
         <span>Dubai</span><i aria-hidden="true"></i>
         <span>Europe</span>
       </p>
-    </section>
-
-    <footer class="footer">
-      <span class="copyright"></span>
-      <a class="linkedin" href="https://www.linkedin.com/company/draycott-holdings" target="_blank" rel="noopener noreferrer">
-        LinkedIn <span class="arrow" aria-hidden="true">↗</span>
-      </a>
     </footer>
   </main>
 
